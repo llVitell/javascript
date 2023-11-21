@@ -146,15 +146,15 @@ class Pokemon{
         this.type = ""
     }
 
-    flight(){
-
+    fight(){
+        throw new Error("Mov wasnt specified")
     }
 
     canFly(){
-        if(this.type == "flying"){
-            return true
+        if(!this.type){
+            throw new Error("Type wasnt specified")
         }
-        else return false
+        else return this.type.includes("flying")
     }
 }
 ```
@@ -162,8 +162,20 @@ class Pokemon{
 - Clase Charizard
 
 ```JS
-class Charizard{
-    constructor()
+class Charizard extends Pokemon{
+    constructor(hp, atk, def, move){
+        super(hp,atk,def)
+        this.move = move
+        this.type = "flying"
+    }
+
+    fight(){
+        if(this.move){
+            console.log(`Charizard is using a movement: ${this.move}`)
+            return this.move
+        }
+        else throw new Error("Movement wasnt specified")
+    }
 }
 ```
 
